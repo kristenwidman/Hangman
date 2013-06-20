@@ -83,6 +83,7 @@ class Guess(webapp2.RequestHandler):
         key = cgi.escape(self.request.get('key'))
         letter = cgi.escape(self.request.get('letter'))
         phrase = cgi.escape(self.request.get('phrase'))
+        print 'phrase',phrase
         state = cgi.escape(self.request.get('state'))
         tries_left = cgi.escape(self.request.get('tries_left'))
         errors = self.validate_letter(letter)
@@ -92,7 +93,7 @@ class Guess(webapp2.RequestHandler):
             r = requests.post(os.path.join(BASE_URL, key), data=json.dumps(payload))
             if r.status_code == requests.codes.ok:
                 js = r.json()
-                tries_left = js['num_tries_left']
+                tries_left = str(int(js['num_tries_left']) + 1)
                 phrase = js['phrase']
                 state = js['state']
                 if DEBUG:
@@ -102,6 +103,8 @@ class Guess(webapp2.RequestHandler):
                     params = {'phrase':phrase}
                     new_url = '/won?' + urllib.urlencode(params)
                     self.redirect(new_url)
+                elif state == "lost" or tries_left < 0:
+                    self.redirect('/lost')
             elif r.status_code == 400:
                 js = r.json()
                 errors = js['error']
@@ -138,8 +141,22 @@ class Won(webapp2.RequestHandler):
         self.response.out.write(template.render(template_values))
 
 
+class Lost(webapp2.RequestHandler):
+
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('templates/lost.html')
+        self.response.out.write(template.render())
+
+class Goodbye(webapp2.RequestHandler):
+
+    def get(self):
+        template = JINJA_ENVIRONMENT.get_template('templates/goodbye.html')
+        self.response.out.write(template.render())
+
 
 app = webapp2.WSGIApplication([('/', StartGame),
                                 ('/guess', Guess),
-                                ('/won', Won)],
+                                ('/won', Won),
+                                ('/lost', Lost),
+                                ('/goodbye', Goodbye)],
                                 debug=DEBUG)

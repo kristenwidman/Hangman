@@ -14,7 +14,15 @@
     <h1>HANGMAN</h1>
     <form method="post">
       {% if phrase != '' %}
-      <input type="hidden" name="phrase" id="phrase" value="{{ phrase }}">Phrase to guess: {{ phrase }}</input>
+      <input type="hidden" name="phrase" id="phrase" value="{{ phrase }}">Phrase to guess:&nbsp;&nbsp;
+        {% for letter in phrase %}
+          {% if letter == ' ' %}
+            &nbsp;&nbsp;&nbsp;
+          {% else %}
+            {{ letter }}&nbsp;
+          {% endif %}
+        {% endfor %}
+      </input>
       <br/>
       <br/>
       {% endif %}

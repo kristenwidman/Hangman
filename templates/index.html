@@ -14,11 +14,12 @@
     <h1>HANGMAN!</h1>
 
     <form method="post">
-      Email <input id="email" name="email" type="email" placeholder="Email" required>
+      <label for="email">Email: 
+      <input id="email" name="email" type="email" placeholder="Email" required>
       <br>
       <div id="errors">{{ errors }}</div>
       <br>
-      <input type="submit" value="Start Game!">
+      <input type="submit" class="submit" value="Start Game!">
     </form>
   </body>
 <html>

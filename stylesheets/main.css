@@ -1,7 +1,7 @@
 body {
     font-family: Verdana, Helvetica, sans-serif;
-    background-color: #EEF3E2;
-    font-size:100%;
+    font-size:120%;
+    background-color: #8FBC8F; /*EEF3E2;*/
 }
 
 h1 {font-size:2em}
@@ -10,12 +10,22 @@ h1 {font-size:2em}
     color: red;
     font-weight: bold;
 }
-#email:focus { 
+
+#email {
+    width:200px;
+}
+
+#email:focus {
     border: 2px solid blue;
 }
 
-#letter:focus { 
+#letter:focus {
     border: 2px solid blue;
 }
 
-
+input[type="submit"] {
+    font-weight:bold;
+    width:100px;
+    height:30px;
+    display: inline-block;
+}

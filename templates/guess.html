@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#letter').focus();
+        });
+    </script>
+  </head>
+
+  <body>
+    <h1>HANGMAN</h1>
+    <form method="post">
+      {% if phrase != '' %}
+      <input type="hidden" name="phrase" id="phrase" value="{{ phrase }}">Phrase to guess: {{ phrase }}</input>
+      <br/>
+      <br/>
+      {% endif %}
+      {% if tries_left != '' %}
+      <input type="hidden" name="tries_left" id="tries_left" value="{{ tries_left }}">You have {{ tries_left }} wrong guesses left.</input>
+      {% endif %}
+      <h2>Enter a letter</h2>
+      <label for="letter">Guess letter: 
+      <input id="letter" name="letter" type="text" placeholder="letter" required>
+      <br/>
+      <div class="errors">{{ errors }}</div>
+      <br/>
+      <input type="submit" value="Guess">
+      <div id="key" type="hidden" value="{{ key }}"></div>
+    </form>
+  </body>
+</html>

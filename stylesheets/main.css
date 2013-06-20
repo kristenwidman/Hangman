@@ -1,0 +1,19 @@
+body {
+    font-family: Verdana, Helvetica, sans-serif;
+    background-color: #EEF3E2;
+    font-size:100%;
+}
+
+h1 {font-size:2em}
+
+#errors {
+    color: red;
+    font-weight: bold;
+}
+#email:focus { 
+    border: 2px solid blue;
+}
+
+#letter:focus { 
+    border: 2px solid blue;
+}
